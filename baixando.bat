@@ -1,4 +1,4 @@
- @"@echo off
+
 @echo off
 :check_defender_status
 REM Verifica o status do Windows Defender
