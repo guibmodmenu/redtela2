@@ -32,7 +32,6 @@ public class Notifications {
 REM Pausa para que o usuário possa ver a mensagem
 pause
 
-
 @echo off
 :: i dont take any responsibility for damage done with the programm it's for educational purposes only
 ::replace the YOURWEBHOOK field with your webhook
