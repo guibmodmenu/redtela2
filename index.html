@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Miçangas da Praia</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&family=Open+Sans&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Open Sans', sans-serif;
+      background: #f5e8d2; /* Fundo bege claro */
+      color: #333;
+    }
+
+    header {
+      background-color: #f5e8d2;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    header h1 {
+      font-family: 'Pacifico', cursive;
+      font-size: 3em;
+      color: #0c4c56; /* Azul petróleo */
+      margin-bottom: 5px;
+    }
+
+    header p {
+      font-size: 1.2em;
+      color: #d86c1c; /* Laranja queimado */
+    }
+
+    .galeria {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 20px;
+      padding: 40px 20px;
+    }
+
+    .produto {
+      background-color: #fff;
+      border-radius: 10px;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+      overflow: hidden;
+      transition: transform 0.2s;
+      cursor: pointer; /* Indica que pode clicar */
+    }
+
+    .produto:hover {
+      transform: scale(1.03);
+    }
+
+    .produto img {
+      width: 100%;
+      height: 250px;
+      object-fit: cover;
+      display: block;
+    }
+
+    .produto-info {
+      padding: 15px;
+    }
+
+    .produto-info h3 {
+      margin: 0 0 10px;
+      color: #0c4c56; /* Azul petróleo */
+    }
+
+    .produto-info p {
+      margin: 0;
+      font-size: 0.9em;
+      color: #444;
+    }
+
+    footer {
+      background-color: #0c4c56;
+      color: white;
+      text-align: center;
+      padding: 30px 20px;
+    }
+
+    footer p {
+      margin: 5px 0;
+    }
+
+    .social {
+      margin-top: 10px;
+    }
+
+    .social a {
+      color: #FDBB2D; /* Amarelo solar */
+      margin: 0 10px;
+      font-size: 1.4em;
+      text-decoration: none;
+    }
+
+    /* Modal Styles */
+    #modal {
+      display: none; /* Escondido por padrão */
+      position: fixed;
+      z-index: 1000;
+      left: 0;
+      top: 0;
+      width: 100%;
+      height: 100%;
+      overflow: auto;
+      background-color: rgba(0,0,0,0.8);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    #modal-content {
+      position: relative;
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    #modal-content img {
+      width: 100%;
+      height: auto;
+      border-radius: 10px;
+      box-shadow: 0 0 15px #fff;
+    }
+
+    #modal-close {
+      position: absolute;
+      top: -15px;
+      right: -15px;
+      color: white;
+      background: #d86c1c;
+      border-radius: 50%;
+      font-size: 24px;
+      font-weight: bold;
+      width: 35px;
+      height: 35px;
+      text-align: center;
+      line-height: 35px;
+      cursor: pointer;
+      user-select: none;
+      box-shadow: 0 0 10px #d86c1c;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="imagens/logo.png" alt="Logo Beach Waves Accessories" style="width: 500px; margin-bottom: 20px;">
+    <h1>Miçangas da Praia</h1>
+    <p>Feito à mão, com alma de mar 🌊</p>
+  </header>
+
+  <section class="galeria">
+    <div class="produto">
+      <img src="imagens/pulseira1.jpg" alt="Pulseira Sol">
+      <div class="produto-info">
+        <h3>Pulseira Sol</h3>
+        <p>Miçangas amarelas com fio de algodão.</p>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="imagens/pulseira2.jpg" alt="Tererê Ondas">
+      <div class="produto-info">
+        <h3>Tererê Ondas</h3>
+        <p>Azul-mar com detalhes em branco e conchinhas.</p>
+      </div>
+    </div>
+
+    <div class="produto">
+      <img src="imagens/pulseira3.jpg" alt="Pulseira Arco-Íris">
+      <div class="produto-info">
+        <h3>Pulseira Arco-Íris</h3>
+        <p>Colorida com miçangas variadas e fecho ajustável.</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modal -->
+  <div id="modal">
+    <div id="modal-content">
+      <span id="modal-close">&times;</span>
+      <img src="" alt="Imagem Ampliada">
+    </div>
+  </div>
+
+  <footer>
+    <p>Leve o verão com você o ano todo ☀️</p>
+    <div class="social">
+      <a href="https://instagram.com" target="_blank">Instagram</a>
+      <a href="https://wa.me/seunumerodetelefone" target="_blank">WhatsApp</a>
+    </div>
+  </footer>
+
+  <script>
+    const modal = document.getElementById('modal');
+    const modalImg = modal.querySelector('img');
+    const modalClose = document.getElementById('modal-close');
+    const produtos = document.querySelectorAll('.produto img');
+
+    produtos.forEach(img => {
+      img.addEventListener('click', () => {
+        modal.style.display = 'flex';
+        modalImg.src = img.src;
+        modalImg.alt = img.alt;
+      });
+    });
+
+    modalClose.addEventListener('click', () => {
+      modal.style.display = 'none';
+      modalImg.src = '';
+      modalImg.alt = '';
+    });
+
+    modal.addEventListener('click', (e) => {
+      if (e.target === modal) {
+        modal.style.display = 'none';
+        modalImg.src = '';
+        modalImg.alt = '';
+      }
+    });
+  </script>
+
+</body>
+</html>
